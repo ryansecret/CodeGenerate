@@ -14,10 +14,8 @@ namespace <#=NameSpace#>
     public class  <#=TableName#>Repository:<#=interfaceName#>, IDao
     {  
          <#    if(IsKeyAutoIncreased) {#>
-
                private readonly EntityPropertyHelper<<#=TableName#>> _propertyHelper =
             new EntityPropertyHelper<<#=TableName#>>();
-
                 <#    }#>
        
         public void Add(<#=TableName#> item)

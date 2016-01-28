@@ -18,7 +18,7 @@ namespace RCodeGenerator.Template
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+    #line 1 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class Repository : RepositoryBase
     {
@@ -29,91 +29,91 @@ namespace RCodeGenerator.Template
         public virtual string TransformText()
         {
             
-            #line 6 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 6 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(UsingArea));
             
             #line default
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 7 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 7 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(NameSpace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    ");
             
-            #line 9 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 9 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
 var interfaceName=string.Format("I{0}Repository",TableName);
             
             #line default
             #line hidden
             this.Write("    public interface ");
             
-            #line 10 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 10 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(interfaceName));
             
             #line default
             #line hidden
             this.Write(" : IRepository<");
             
-            #line 10 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 10 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 10 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 10 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(KeyType));
             
             #line default
             #line hidden
             this.Write(">\r\n    {\r\n      \r\n    }\r\n    public class  ");
             
-            #line 14 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 14 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("Repository:");
             
-            #line 14 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 14 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(interfaceName));
             
             #line default
             #line hidden
             this.Write(", IDao\r\n    {  \r\n         ");
             
-            #line 16 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 16 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
     if(IsKeyAutoIncreased) {
             
             #line default
             #line hidden
-            this.Write("\r\n               private readonly EntityPropertyHelper<");
+            this.Write("               private readonly EntityPropertyHelper<");
             
-            #line 18 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 17 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("> _propertyHelper =\r\n            new EntityPropertyHelper<");
             
-            #line 19 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 18 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
-            this.Write(">();\r\n\r\n                ");
+            this.Write(">();\r\n                ");
             
-            #line 21 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 19 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
     }
             
             #line default
             #line hidden
             this.Write("       \r\n        public void Add(");
             
-            #line 23 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 21 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -121,14 +121,14 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write(" item)\r\n        {\r\n            using (var conn = Database.Open())\r\n            {\r" +
                     "\n                \r\n                var tuple = ");
             
-            #line 28 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 26 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("Sql.Add(item);\r\n                ");
             
-            #line 29 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 27 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
     if(IsKeyAutoIncreased) {
             
             #line default
@@ -137,21 +137,21 @@ var interfaceName=string.Format("I{0}Repository",TableName);
                     "em2);\r\n                _propertyHelper.SetValue(m => m.Id, item, id);\r\n\r\n       " +
                     "         ");
             
-            #line 34 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 32 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
     }else{ 
             
             #line default
             #line hidden
             this.Write("\r\n                conn.Execute(tuple.Item1, (object) tuple.Item2);\r\n");
             
-            #line 37 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 35 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
     } 
             
             #line default
             #line hidden
             this.Write("               \r\n            }\r\n        }\r\n\r\n         public void Update(");
             
-            #line 42 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 40 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -159,7 +159,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write(" item)\r\n         {\r\n            using (var con = Database.Open())\r\n            {\r" +
                     "\n                var tuple = ");
             
-            #line 46 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 44 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -167,7 +167,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write("Sql.Update(item);\r\n                con.Execute(tuple.Item1, (object) tuple.Item2)" +
                     ";\r\n            }\r\n         }\r\n        public void Remove(");
             
-            #line 50 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 48 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -175,7 +175,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write(" item)\r\n        {\r\n            using (var con = Database.Open())\r\n            {\r\n" +
                     "                var tuple = ");
             
-            #line 54 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 52 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -183,14 +183,14 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write("Sql.Remove(item.Id);\r\n                con.Execute(tuple.Item1, (object) tuple.Ite" +
                     "m2);\r\n            }\r\n        }\r\n        \r\n        public ");
             
-            #line 59 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 57 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" FindBy(");
             
-            #line 59 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 57 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(KeyType));
             
             #line default
@@ -198,14 +198,14 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write(" key)\r\n        { \r\n            using (var con = Database.Open())\r\n            {\r\n" +
                     "                var tuple = ");
             
-            #line 63 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 61 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("Sql.FindBy(key);\r\n\r\n                return\r\n                    con.Query< ");
             
-            #line 66 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 64 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -213,7 +213,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write(">(tuple.Item1, (object) tuple.Item2)\r\n                        .FirstOrDefault();\r" +
                     "\n            }\r\n        }\r\n        public IList<");
             
-            #line 70 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 68 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -222,7 +222,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
                     " }\r\n         public void RemoveAll()\r\n        {\r\n             using (var con = D" +
                     "atabase.Open())\r\n            {\r\n                var tuple = ");
             
-            #line 78 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 76 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -230,7 +230,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write("Sql.RemoveAllSql(item.Id);\r\n                con.Execute(tuple.Item1, (object) tup" +
                     "le.Item2);\r\n            }\r\n        }\r\n       \r\n    }\r\n   ");
             
-            #line 84 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 82 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
     var columns= string.Join(",",ColumnInfos.Select(d=>d.Name));
          var columnsParams= string.Join(",",ColumnInfos.Select(d=>"@"+d.Name));
    
@@ -239,7 +239,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             #line hidden
             this.Write("    internal class ");
             
-            #line 87 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 85 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -247,21 +247,21 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write("Sql\r\n    {\r\n        public static string BaseSelectSql()\r\n        {\r\n            " +
                     "return @\"SELECT ");
             
-            #line 91 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 89 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(columns));
             
             #line default
             #line hidden
             this.Write(" from ");
             
-            #line 91 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 89 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" \";\r\n        }\r\n\r\n        public static Tuple<string, dynamic> FindBy(");
             
-            #line 94 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 92 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(KeyType));
             
             #line default
@@ -270,42 +270,42 @@ var interfaceName=string.Format("I{0}Repository",TableName);
                     " \"id=@Id\");\r\n \r\n            return new Tuple<string, dynamic>(sql, new {Id = id}" +
                     ");\r\n        } \r\n\r\n        public static Tuple<string, dynamic> Add(");
             
-            #line 101 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 99 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" item)\r\n        {\r\n            var sql =\r\n                @\"INSERT INTO ");
             
-            #line 104 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 102 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 104 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 102 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(columns));
             
             #line default
             #line hidden
             this.Write(") VALUES (");
             
-            #line 104 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 102 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(columnsParams));
             
             #line default
             #line hidden
             this.Write(");\";\r\n            ");
             
-            #line 105 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 103 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
 if(KeyType=="int") {
             
             #line default
             #line hidden
             this.Write("               sql+=\"SELECT LAST_INSERT_ID()\"\r\n            ");
             
-            #line 107 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 105 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
 }
             
             #line default
@@ -313,21 +313,21 @@ if(KeyType=="int") {
             this.Write("             \r\n            return new Tuple<string, dynamic>(sql, ToDbModel(item)" +
                     ");\r\n        }\r\n \r\n        public static Tuple<string, dynamic> Update(");
             
-            #line 112 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 110 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" item)\r\n        {\r\n            var sql =\r\n                @\"UPDATE ");
             
-            #line 115 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 113 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" SET ");
             
-            #line 115 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 113 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",",ColumnInfos.Select(d=>string.Format("{0}=@{0}",d.Name)))));
             
             #line default
@@ -336,14 +336,14 @@ if(KeyType=="int") {
                     "em));\r\n        }\r\n        public static string RemoveAllSql()\r\n        {\r\n      " +
                     "      return \"DELETE FROM ");
             
-            #line 120 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 118 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("\";\r\n        }\r\n        public static Tuple<string, dynamic> Remove(");
             
-            #line 122 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 120 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(KeyType));
             
             #line default
@@ -352,14 +352,14 @@ if(KeyType=="int") {
                     "\"id=@Id\");\r\n\r\n            return new Tuple<string, dynamic>(sql, new {Id = id});" +
                     "\r\n        } \r\n        public static dynamic ToDbModel(");
             
-            #line 128 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 126 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" item)\r\n        {\r\n            return new\r\n            {\r\n                ");
             
-            #line 132 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Repository.tt"
+            #line 130 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",",ColumnInfos.Select(d=>"item."+d.Name))));
             
             #line default

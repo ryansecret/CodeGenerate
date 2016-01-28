@@ -14,9 +14,7 @@ namespace <#=NameSpace#>
           public  <#=TableName#>(<#=Parameters#>)
           {
              <#    foreach(var col in this.ColumnInfos) {#>
-
-                this.<#=col.Name#>=<#=col.Name.ToLower() #>;             
-
+                this.<#=col.Name#>=<#=col.Name.ToLower() #>;            
              <#    } #>
           }
 
