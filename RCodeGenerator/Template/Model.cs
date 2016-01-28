@@ -18,7 +18,7 @@ namespace RCodeGenerator.Template
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+    #line 1 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class Model : ModelBase
     {
@@ -29,133 +29,140 @@ namespace RCodeGenerator.Template
         public virtual string TransformText()
         {
             
-            #line 6 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 6 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(UsingArea));
             
             #line default
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 7 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 7 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(NameSpace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public class  ");
             
-            #line 9 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 9 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(": EntityBase<");
             
-            #line 9 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 9 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(KeyType));
             
             #line default
             #line hidden
-            this.Write(">\r\n    {\r\n          public  ");
+            this.Write(">\r\n    {\r\n          public ");
             
-            #line 11 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 11 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
+            
+            #line default
+            #line hidden
+            this.Write("()\r\n          {\r\n          }\r\n          public  ");
+            
+            #line 14 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 11 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 14 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Parameters));
             
             #line default
             #line hidden
             this.Write(")\r\n          {\r\n             ");
             
-            #line 13 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 16 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
     foreach(var col in this.ColumnInfos) {
             
             #line default
             #line hidden
             this.Write("\r\n                this.");
             
-            #line 15 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 18 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.Name));
             
             #line default
             #line hidden
             this.Write("=");
             
-            #line 15 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 18 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.Name.ToLower()));
             
             #line default
             #line hidden
             this.Write(";             \r\n\r\n             ");
             
-            #line 17 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 20 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
     } 
             
             #line default
             #line hidden
             this.Write("          }\r\n\r\n    ");
             
-            #line 20 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 23 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
     foreach(var col in this.ColumnInfos) {
             
             #line default
             #line hidden
             this.Write("     \r\n          ");
             
-            #line 22 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 25 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
         if(col.IsNullable){
             
             #line default
             #line hidden
             this.Write("          public ");
             
-            #line 23 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 26 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GetNullablType(col)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 23 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 26 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.Name));
             
             #line default
             #line hidden
             this.Write(" {get;private set;}\r\n          ");
             
-            #line 24 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 27 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
         } else{
             
             #line default
             #line hidden
             this.Write("          public ");
             
-            #line 25 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 28 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.CSharpType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 25 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 28 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(col.Name));
             
             #line default
             #line hidden
             this.Write(" {get;private set;}\r\n          ");
             
-            #line 26 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 29 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
         } 
             
             #line default
             #line hidden
             this.Write("    ");
             
-            #line 27 "c:\users\ryan\documents\visual studio 2013\Projects\RCodeGenerator\RCodeGenerator\Template\Model.tt"
+            #line 30 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Model.tt"
     } 
             
             #line default

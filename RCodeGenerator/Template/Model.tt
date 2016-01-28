@@ -8,6 +8,9 @@ namespace <#=NameSpace#>
 {
     public class  <#=TableName#>: EntityBase<<#=KeyType#>>
     {
+          public <#=TableName#>()
+          {
+          }
           public  <#=TableName#>(<#=Parameters#>)
           {
              <#    foreach(var col in this.ColumnInfos) {#>
