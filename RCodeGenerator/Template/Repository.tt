@@ -1,0 +1,137 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#=UsingArea#>
+namespace <#=NameSpace#>
+{
+    <#var interfaceName=string.Format("I{0}Repository",TableName);#>
+    public interface <#=interfaceName#> : IRepository<<#=TableName#>, <#=KeyType#>>
+    {
+      
+    }
+    public class  <#=TableName#>Repository:<#=interfaceName#>, IDao
+    {  
+         <#    if(IsKeyAutoIncreased) {#>
+
+               private readonly EntityPropertyHelper<<#=TableName#>> _propertyHelper =
+            new EntityPropertyHelper<<#=TableName#>>();
+
+                <#    }#>
+       
+        public void Add(<#=TableName#> item)
+        {
+            using (var conn = Database.Open())
+            {
+                
+                var tuple = <#=TableName#>Sql.Add(item);
+                <#    if(IsKeyAutoIncreased) {#>
+
+                var id = conn.ExecuteScalar<int>(tuple.Item1, (object) tuple.Item2);
+                _propertyHelper.SetValue(m => m.Id, item, id);
+
+                <#    }else{ #>
+
+                conn.Execute(tuple.Item1, (object) tuple.Item2);
+<#    } #>
+               
+            }
+        }
+
+         public void Update(<#=TableName#> item)
+         {
+            using (var con = Database.Open())
+            {
+                var tuple = <#=TableName#>Sql.Update(item);
+                con.Execute(tuple.Item1, (object) tuple.Item2);
+            }
+         }
+        public void Remove(<#=TableName#> item)
+        {
+            using (var con = Database.Open())
+            {
+                var tuple = <#=TableName#>Sql.Remove(item.Id);
+                con.Execute(tuple.Item1, (object) tuple.Item2);
+            }
+        }
+        
+        public <#=TableName#> FindBy(<#=KeyType#> key)
+        { 
+            using (var con = Database.Open())
+            {
+                var tuple = <#=TableName#>Sql.FindBy(key);
+
+                return
+                    con.Query< <#=TableName#>>(tuple.Item1, (object) tuple.Item2)
+                        .FirstOrDefault();
+            }
+        }
+        public IList<<#=TableName#>> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+         public void RemoveAll()
+        {
+             using (var con = Database.Open())
+            {
+                var tuple = <#=TableName#>Sql.RemoveAllSql(item.Id);
+                con.Execute(tuple.Item1, (object) tuple.Item2);
+            }
+        }
+       
+    }
+   <#    var columns= string.Join(",",ColumnInfos.Select(d=>d.Name));
+         var columnsParams= string.Join(",",ColumnInfos.Select(d=>"@"+d.Name));
+   #>
+    internal class <#=TableName#>Sql
+    {
+        public static string BaseSelectSql()
+        {
+            return @"SELECT <#=columns#> from <#=TableName#> ";
+        }
+
+        public static Tuple<string, dynamic> FindBy(<#=KeyType#> id)
+        {
+            var sql = string.Join(" ", BaseSelectSql(), "WHERE", "id=@Id");
+ 
+            return new Tuple<string, dynamic>(sql, new {Id = id});
+        } 
+
+        public static Tuple<string, dynamic> Add(<#=TableName#> item)
+        {
+            var sql =
+                @"INSERT INTO <#=TableName#>(<#=columns #>) VALUES (<#=columnsParams#>);";
+            <#if(KeyType=="int") {#>
+               sql+="SELECT LAST_INSERT_ID()"
+            <#}#>
+             
+            return new Tuple<string, dynamic>(sql, ToDbModel(item));
+        }
+ 
+        public static Tuple<string, dynamic> Update(<#=TableName#> item)
+        {
+            var sql =
+                @"UPDATE <#=TableName#> SET <#=string.Join(",",ColumnInfos.Select(d=>string.Format("{0}=@{0}",d.Name))) #>  WHERE Id=@Id";
+            return new Tuple<string, dynamic>(sql, ToDbModel(item));
+        }
+        public static string RemoveAllSql()
+        {
+            return "DELETE FROM <#=TableName#>";
+        }
+        public static Tuple<string, dynamic> Remove(<#=KeyType#> id)
+        {
+            var sql = string.Join(" ", RemoveAllSql(), "WHERE", "id=@Id");
+
+            return new Tuple<string, dynamic>(sql, new {Id = id});
+        } 
+        public static dynamic ToDbModel(<#=TableName#> item)
+        {
+            return new
+            {
+                <#=string.Join(",",ColumnInfos.Select(d=>"item."+d.Name))#>
+            };
+        }
+    } 
+}
+

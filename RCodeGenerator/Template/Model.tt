@@ -1,0 +1,39 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#=UsingArea#>
+namespace <#=NameSpace#>
+{
+    public class  <#=TableName#>: EntityBase<<#=KeyType#>>
+    {
+          public  <#=TableName#>(<#=Parameters#>)
+          {
+             <#    foreach(var col in this.ColumnInfos) {#>
+
+                this.<#=col.Name#>=<#=col.Name.ToLower() #>;             
+
+             <#    } #>
+          }
+
+    <#    foreach(var col in this.ColumnInfos) {#>
+     
+          <#        if(col.IsNullable){#>
+          public <#=          GetNullablType(col)#> <#=                col.Name #> {get;private set;}
+          <#        } else{#>
+          public <#=                col.CSharpType#> <#=                col.Name #> {get;private set;}
+          <#        } #>
+    <#    } #>
+
+        protected override BrokenRuleMessage GetBrokenRuleMessages()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Validate()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
