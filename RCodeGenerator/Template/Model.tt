@@ -10,6 +10,7 @@ namespace <#=NameSpace#>
     {
           public <#=TableName#>()
           {
+
           }
           public  <#=TableName#>(<#=Parameters#>)
           {

@@ -104,7 +104,9 @@ namespace <#=NameSpace#>
        
     }
    <#    var columns= string.Join(",",ColumnInfos.Select(d=>d.Name));
-         var columnsParams= string.Join(",",ColumnInfos.Select(d=>"@"+d.Name));
+         var columnsWithoutId=ColumnInfos.Where(c=>c.IsKey==0);
+         var columnsWithoutIdText=string.Join(",",columnsWithoutId.Select(d=>d.Name));
+         var columnsParams= string.Join(",",columnsWithoutId.Select(d=>"@"+d.Name));
    #>
     internal class <#=TableName#>Sql
     {
@@ -123,7 +125,7 @@ namespace <#=NameSpace#>
         public static Tuple<string, dynamic> Add(<#=TableName#> item)
         {
             var sql =
-                @"INSERT INTO <#=TableName#>(<#=columns #>) VALUES (<#=columnsParams#>);";
+                @"INSERT INTO <#=TableName#>(<#=columnsWithoutId #>) VALUES (<#=columnsParams#>);";
             <#if(KeyType=="int") {#>
                sql+="SELECT LAST_INSERT_ID()";
             <#}#>
@@ -134,7 +136,7 @@ namespace <#=NameSpace#>
         public static Tuple<string, dynamic> Update(<#=TableName#> item)
         {
             var sql =
-                @"UPDATE <#=TableName#> SET <#=string.Join(",",ColumnInfos.Select(d=>string.Format("{0}=@{0}",d.Name))) #>  WHERE Id=@Id";
+                @"UPDATE <#=TableName#> SET <#=string.Join(",",columnsWithoutId.Select(d=>string.Format("{0}=@{0}",d.Name))) #>  WHERE Id=@Id";
             return new Tuple<string, dynamic>(sql, ToDbModel(item));
         }
         public static string RemoveAllSql()
