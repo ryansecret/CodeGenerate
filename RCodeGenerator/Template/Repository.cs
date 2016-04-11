@@ -328,7 +328,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write("(");
             
             #line 128 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(columnsWithoutId));
+            this.Write(this.ToStringHelper.ToStringWithCulture(columnsWithoutIdText));
             
             #line default
             #line hidden

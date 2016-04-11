@@ -125,7 +125,7 @@ namespace <#=NameSpace#>
         public static Tuple<string, dynamic> Add(<#=TableName#> item)
         {
             var sql =
-                @"INSERT INTO <#=TableName#>(<#=columnsWithoutId #>) VALUES (<#=columnsParams#>);";
+                @"INSERT INTO <#=TableName#>(<#=columnsWithoutIdText #>) VALUES (<#=columnsParams#>);";
             <#if(KeyType=="int") {#>
                sql+="SELECT LAST_INSERT_ID()";
             <#}#>
