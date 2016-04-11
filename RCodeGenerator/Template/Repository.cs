@@ -211,26 +211,60 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             #line default
             #line hidden
             this.Write(">(tuple.Item1, (object) tuple.Item2)\r\n                        .FirstOrDefault();\r" +
-                    "\n            }\r\n        }\r\n        public IList<");
+                    "\n            }\r\n        }\r\n        public IEnumerable<");
             
             #line 68 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
-            this.Write("> FindAll()\r\n        {\r\n            throw new NotImplementedException();\r\n       " +
-                    " }\r\n         public void RemoveAll()\r\n        {\r\n             using (var con = D" +
-                    "atabase.Open())\r\n            {\r\n                var tuple = ");
+            this.Write(@"> Select(Query query, out int totalRows)
+        {
+            if (query.PageIndex <= 0)
+            {
+                query.PageIndex = 1;
+            }
+            if (query.PageSize <= 0 )
+            {
+                query.PageSize = 100;
+            }
+
+            using (var conn = Database.Open())
+            {
+
+                var tuple = Sql.Select(query);
+
+                SqlMapper.GridReader reader = conn.QueryMultiple(tuple.Item1 + tuple.Item2, (object)tuple.Item3);
+
+                var result = reader.Read<object>().First() as IDictionary<string, object>;
+                totalRows = Convert.ToInt32(result[""Count""]);
+                return reader.Read<");
             
-            #line 76 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 88 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
-            this.Write("Sql.RemoveAllSql(item.Id);\r\n                con.Execute(tuple.Item1, (object) tup" +
-                    "le.Item2);\r\n            }\r\n        }\r\n       \r\n    }\r\n   ");
+            this.Write(">();\r\n            }  \r\n        }\r\n        public IList<");
             
-            #line 82 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 91 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
+            
+            #line default
+            #line hidden
+            this.Write("> FindAll()\r\n        {\r\n            throw new NotImplementedException();\r\n       " +
+                    " }\r\n         public void RemoveAll()\r\n        {\r\n             using (var con = D" +
+                    "atabase.Open())\r\n            {\r\n                var sql = ");
+            
+            #line 99 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
+            
+            #line default
+            #line hidden
+            this.Write("Sql.RemoveAllSql();\r\n                con.Execute(sql );\r\n            }\r\n        }" +
+                    "\r\n\r\n       \r\n    }\r\n   ");
+            
+            #line 106 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
     var columns= string.Join(",",ColumnInfos.Select(d=>d.Name));
          var columnsParams= string.Join(",",ColumnInfos.Select(d=>"@"+d.Name));
    
@@ -239,7 +273,7 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             #line hidden
             this.Write("    internal class ");
             
-            #line 85 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 109 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
@@ -247,21 +281,21 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             this.Write("Sql\r\n    {\r\n        public static string BaseSelectSql()\r\n        {\r\n            " +
                     "return @\"SELECT ");
             
-            #line 89 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 113 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(columns));
             
             #line default
             #line hidden
             this.Write(" from ");
             
-            #line 89 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 113 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" \";\r\n        }\r\n\r\n        public static Tuple<string, dynamic> FindBy(");
             
-            #line 92 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 116 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(KeyType));
             
             #line default
@@ -270,42 +304,42 @@ var interfaceName=string.Format("I{0}Repository",TableName);
                     " \"id=@Id\");\r\n \r\n            return new Tuple<string, dynamic>(sql, new {Id = id}" +
                     ");\r\n        } \r\n\r\n        public static Tuple<string, dynamic> Add(");
             
-            #line 99 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 123 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" item)\r\n        {\r\n            var sql =\r\n                @\"INSERT INTO ");
             
-            #line 102 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 126 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 102 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 126 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(columns));
             
             #line default
             #line hidden
             this.Write(") VALUES (");
             
-            #line 102 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 126 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(columnsParams));
             
             #line default
             #line hidden
             this.Write(");\";\r\n            ");
             
-            #line 103 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 127 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
 if(KeyType=="int") {
             
             #line default
             #line hidden
             this.Write("               sql+=\"SELECT LAST_INSERT_ID()\"\r\n            ");
             
-            #line 105 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 129 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
 }
             
             #line default
@@ -313,21 +347,21 @@ if(KeyType=="int") {
             this.Write("             \r\n            return new Tuple<string, dynamic>(sql, ToDbModel(item)" +
                     ");\r\n        }\r\n \r\n        public static Tuple<string, dynamic> Update(");
             
-            #line 110 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 134 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" item)\r\n        {\r\n            var sql =\r\n                @\"UPDATE ");
             
-            #line 113 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 137 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" SET ");
             
-            #line 113 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 137 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",",ColumnInfos.Select(d=>string.Format("{0}=@{0}",d.Name)))));
             
             #line default
@@ -336,35 +370,84 @@ if(KeyType=="int") {
                     "em));\r\n        }\r\n        public static string RemoveAllSql()\r\n        {\r\n      " +
                     "      return \"DELETE FROM ");
             
-            #line 118 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 142 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write("\";\r\n        }\r\n        public static Tuple<string, dynamic> Remove(");
             
-            #line 120 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 144 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(KeyType));
             
             #line default
             #line hidden
-            this.Write(" id)\r\n        {\r\n            var sql = string.Join(\" \", RemoveAllSql(), \"WHERE\", " +
-                    "\"id=@Id\");\r\n\r\n            return new Tuple<string, dynamic>(sql, new {Id = id});" +
-                    "\r\n        } \r\n        public static dynamic ToDbModel(");
+            this.Write(@" id)
+        {
+            var sql = string.Join("" "", RemoveAllSql(), ""WHERE"", ""id=@Id"");
+
+            return new Tuple<string, dynamic>(sql, new {Id = id});
+        } 
+         public static Tuple<string, string, dynamic> Select(Query query)
+        {
             
-            #line 126 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            var builder = new SQLBuilder();
+            var oper = ""and"";
+            builder.AppendWhere();
+            
+            string selectsql = string.Join("" "", BaseSelectSql(),builder.Sql(), ""ORDER BY id DESC"", ""LIMIT @Limit OFFSET @Offset;"");
+            string sqlcount =string.Format( ""SELECT COUNT(*) AS Count FROM ");
+            
+            #line 158 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
+            
+            #line default
+            #line hidden
+            this.Write(@"  {0};"",builder.Sql());
+            return new Tuple<string, string, dynamic>(sqlcount, selectsql, new
+            {
+                Limit = query.PageSize,
+                Offset = (query.PageIndex - 1) * query.PageSize,
+               
+            });
+        }
+        public static dynamic ToDbModel(");
+            
+            #line 166 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
             
             #line default
             #line hidden
             this.Write(" item)\r\n        {\r\n            return new\r\n            {\r\n                ");
             
-            #line 130 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            #line 170 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",",ColumnInfos.Select(d=>"item."+d.Name))));
             
             #line default
             #line hidden
-            this.Write("\r\n            };\r\n        }\r\n    } \r\n}\r\n\r\n");
+            this.Write(@"
+            };
+        }
+    } 
+     public class Query
+    {
+     
+        public Int32 PageIndex;
+        public Int32 PageSize;
+
+        public Int32 Limit
+        {
+            get { return this.PageSize; }
+        }
+
+        public Int32 Offset
+        {
+            get { return (this.PageIndex - 1) * this.PageSize; }
+        }
+    }
+}
+
+");
             return this.GenerationEnvironment.ToString();
         }
     }

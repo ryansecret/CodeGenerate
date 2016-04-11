@@ -65,6 +65,29 @@ namespace <#=NameSpace#>
                         .FirstOrDefault();
             }
         }
+        public IEnumerable<<#=TableName#>> Select(Query query, out int totalRows)
+        {
+            if (query.PageIndex <= 0)
+            {
+                query.PageIndex = 1;
+            }
+            if (query.PageSize <= 0 )
+            {
+                query.PageSize = 100;
+            }
+
+            using (var conn = Database.Open())
+            {
+
+                var tuple = Sql.Select(query);
+
+                SqlMapper.GridReader reader = conn.QueryMultiple(tuple.Item1 + tuple.Item2, (object)tuple.Item3);
+
+                var result = reader.Read<object>().First() as IDictionary<string, object>;
+                totalRows = Convert.ToInt32(result["Count"]);
+                return reader.Read<<#=TableName#>>();
+            }  
+        }
         public IList<<#=TableName#>> FindAll()
         {
             throw new NotImplementedException();
@@ -73,10 +96,11 @@ namespace <#=NameSpace#>
         {
              using (var con = Database.Open())
             {
-                var tuple = <#=TableName#>Sql.RemoveAllSql(item.Id);
-                con.Execute(tuple.Item1, (object) tuple.Item2);
+                var sql = <#=TableName#>Sql.RemoveAllSql();
+                con.Execute(sql );
             }
         }
+
        
     }
    <#    var columns= string.Join(",",ColumnInfos.Select(d=>d.Name));
@@ -123,6 +147,22 @@ namespace <#=NameSpace#>
 
             return new Tuple<string, dynamic>(sql, new {Id = id});
         } 
+         public static Tuple<string, string, dynamic> Select(Query query)
+        {
+            
+            var builder = new SQLBuilder();
+            var oper = "and";
+            builder.AppendWhere();
+            
+            string selectsql = string.Join(" ", BaseSelectSql(),builder.Sql(), "ORDER BY id DESC", "LIMIT @Limit OFFSET @Offset;");
+            string sqlcount =string.Format( "SELECT COUNT(*) AS Count FROM <#=TableName#>  {0};",builder.Sql());
+            return new Tuple<string, string, dynamic>(sqlcount, selectsql, new
+            {
+                Limit = query.PageSize,
+                Offset = (query.PageIndex - 1) * query.PageSize,
+               
+            });
+        }
         public static dynamic ToDbModel(<#=TableName#> item)
         {
             return new
@@ -131,5 +171,21 @@ namespace <#=NameSpace#>
             };
         }
     } 
+     public class Query
+    {
+     
+        public Int32 PageIndex;
+        public Int32 PageSize;
+
+        public Int32 Limit
+        {
+            get { return this.PageSize; }
+        }
+
+        public Int32 Offset
+        {
+            get { return (this.PageIndex - 1) * this.PageSize; }
+        }
+    }
 }
 

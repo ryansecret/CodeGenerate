@@ -19,6 +19,7 @@ namespace RCodeGenerator.ViewModel
         private readonly DbService _dbService;
         public MainVm(DbService dbService)
         {
+           
             NameSpace = Properties.Settings.Default.codenamespace;
             CodePath = Properties.Settings.Default.path;
             UsingSpace = Properties.Settings.Default.usingspace;
