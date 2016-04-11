@@ -142,7 +142,7 @@ namespace RCodeGenerator.ViewModel
             {
                 foreach (var tb in TableInfoVms.Where(t=>t.IsCheck))
                 {
-                    var columns = _dbService.GetColumnInfos(Properties.Settings.Default.dbname, tb.TableName);
+                    var columns = _dbService.GetColumnInfos(Properties.Settings.Default.dbname, tb.TableName).Where(c=>c.IsKey==0).ToList();
                     Model model = new Model(tb.TableName,columns);
                     model.NameSpace = NameSpace;
                     model.UsingArea = UsingSpace;

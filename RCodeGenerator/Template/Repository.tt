@@ -79,7 +79,7 @@ namespace <#=NameSpace#>
             using (var conn = Database.Open())
             {
 
-                var tuple = Sql.Select(query);
+                var tuple = <#=TableName#>Sql.Select(query);
 
                 SqlMapper.GridReader reader = conn.QueryMultiple(tuple.Item1 + tuple.Item2, (object)tuple.Item3);
 
@@ -125,7 +125,7 @@ namespace <#=NameSpace#>
             var sql =
                 @"INSERT INTO <#=TableName#>(<#=columns #>) VALUES (<#=columnsParams#>);";
             <#if(KeyType=="int") {#>
-               sql+="SELECT LAST_INSERT_ID()"
+               sql+="SELECT LAST_INSERT_ID()";
             <#}#>
              
             return new Tuple<string, dynamic>(sql, ToDbModel(item));

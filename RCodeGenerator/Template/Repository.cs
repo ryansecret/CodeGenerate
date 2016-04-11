@@ -232,7 +232,14 @@ var interfaceName=string.Format("I{0}Repository",TableName);
             using (var conn = Database.Open())
             {
 
-                var tuple = Sql.Select(query);
+                var tuple = ");
+            
+            #line 82 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(TableName));
+            
+            #line default
+            #line hidden
+            this.Write(@"Sql.Select(query);
 
                 SqlMapper.GridReader reader = conn.QueryMultiple(tuple.Item1 + tuple.Item2, (object)tuple.Item3);
 
@@ -337,7 +344,7 @@ if(KeyType=="int") {
             
             #line default
             #line hidden
-            this.Write("               sql+=\"SELECT LAST_INSERT_ID()\"\r\n            ");
+            this.Write("               sql+=\"SELECT LAST_INSERT_ID()\";\r\n            ");
             
             #line 129 "C:\Users\ryan\Documents\Visual Studio 2013\Projects\CodeGenerate\RCodeGenerator\Template\Repository.tt"
 }
